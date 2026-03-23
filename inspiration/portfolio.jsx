@@ -75,7 +75,7 @@ function SkillBadge({ skill }) {
       background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)",
       color: "#a5b4fc", borderRadius: 6, padding: "3px 10px",
       fontSize: 11, fontWeight: 600, letterSpacing: 0.3,
-      fontFamily: "Geist,monospace",
+      fontFamily: "'JetBrains Mono',monospace",
     }}>{skill}</span>
   );
 }
@@ -118,7 +118,7 @@ function ProfileCard({ mobile }) {
             </div>
           )}
         </div>
-        <div style={{ fontSize: mobile ? 16 : 18, fontWeight: 800, color: "#f1f1f9", letterSpacing: -0.5, fontFamily: "'Geist',sans-serif" }}>{PROFILE.name}</div>
+        <div style={{ fontSize: mobile ? 16 : 18, fontWeight: 800, color: "#f1f1f9", letterSpacing: -0.5, fontFamily: "'Syne',sans-serif" }}>{PROFILE.name}</div>
         <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 700, letterSpacing: 0.5, marginTop: 1 }}>{PROFILE.title}</div>
         <p style={{ fontSize: 12.5, color: "#9ca3af", lineHeight: 1.6, margin: "10px 0" }}>{PROFILE.bio}</p>
         <div style={{ fontSize: 11.5, color: "#6b7280", marginBottom: 12, display: "flex", alignItems: "center", gap: 4 }}>
@@ -127,7 +127,7 @@ function ProfileCard({ mobile }) {
         <div style={{ display: "flex", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "10px 0", marginBottom: 14 }}>
           {[["Posts", PROFILE.stats.posts], ["Followers", PROFILE.stats.followers], ["Following", PROFILE.stats.following]].map(([l, v]) => (
             <div key={l} style={{ flex: 1, textAlign: "center" }}>
-              <div style={{ fontSize: 15, fontWeight: 800, color: "#e2e8f0", fontFamily: "'Geist',sans-serif" }}>{v}</div>
+              <div style={{ fontSize: 15, fontWeight: 800, color: "#e2e8f0", fontFamily: "'Syne',sans-serif" }}>{v}</div>
               <div style={{ fontSize: 10, color: "#6b7280", letterSpacing: 0.5 }}>{l}</div>
             </div>
           ))}
@@ -191,11 +191,11 @@ function ProjectsCard({ horizontal }) {
       <div style={{ display: "flex", flexDirection: horizontal ? "row" : "column", gap: 10, overflowX: horizontal ? "auto" : "unset", paddingBottom: horizontal ? 4 : 0 }}>
         {PROJECTS.map((p, i) => (
           <div key={i} style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.12)", borderRadius: 10, padding: "10px 12px", cursor: "pointer", flexShrink: horizontal ? 0 : "unset", minWidth: horizontal ? 170 : "unset" }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: "#a5b4fc", marginBottom: 3, fontFamily: "'Geist',monospace" }}>{p.name}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#a5b4fc", marginBottom: 3, fontFamily: "'JetBrains Mono',monospace" }}>{p.name}</div>
             <div style={{ fontSize: 11, color: "#6b7280", lineHeight: 1.4 }}>{p.desc}</div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 6 }}>
               <span style={{ fontSize: 10.5, color: "#4b5563" }}>⭐ {p.stars}</span>
-              <span style={{ fontSize: 9.5, background: "rgba(6,182,212,0.12)", color: "#22d3ee", border: "1px solid rgba(6,182,212,0.2)", borderRadius: 4, padding: "1px 6px", fontFamily: "'Geist',monospace" }}>{p.lang}</span>
+              <span style={{ fontSize: 9.5, background: "rgba(6,182,212,0.12)", color: "#22d3ee", border: "1px solid rgba(6,182,212,0.2)", borderRadius: 4, padding: "1px 6px", fontFamily: "'JetBrains Mono',monospace" }}>{p.lang}</span>
             </div>
           </div>
         ))}
@@ -272,14 +272,14 @@ function BlogCard({ post, index, mobile }) {
         <Avatar size={mobile ? 38 : 46} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-            <span style={{ fontSize: mobile ? 13 : 14, fontWeight: 800, color: "#f1f1f9", fontFamily: "'Geist',sans-serif" }}>{PROFILE.name}</span>
+            <span style={{ fontSize: mobile ? 13 : 14, fontWeight: 800, color: "#f1f1f9", fontFamily: "'Syne',sans-serif" }}>{PROFILE.name}</span>
             <span style={{ fontSize: 11, color: "#4b5563" }}>@gopikrsh · {post.date}</span>
           </div>
           <div style={{ fontSize: 10.5, color: "#6b7280" }}>{PROFILE.title}</div>
         </div>
         <span style={{ background: tag.bg, color: tag.text, border: `1px solid ${tag.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{post.tag}</span>
       </div>
-      <h2 style={{ fontSize: mobile ? 14 : 16, fontWeight: 800, color: "#e2e8f0", margin: "0 0 7px", lineHeight: 1.4, fontFamily: "'Geist',sans-serif", letterSpacing: -0.3 }}>{post.title}</h2>
+      <h2 style={{ fontSize: mobile ? 14 : 16, fontWeight: 800, color: "#e2e8f0", margin: "0 0 7px", lineHeight: 1.4, fontFamily: "'Syne',sans-serif", letterSpacing: -0.3 }}>{post.title}</h2>
       <p style={{ fontSize: mobile ? 12.5 : 13.5, color: "#9ca3af", lineHeight: 1.65, margin: "0 0 12px" }}>{post.preview}</p>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 10, flexWrap: "wrap", gap: 8 }}>
         <div style={{ display: "flex", gap: 14 }}>
@@ -320,7 +320,7 @@ function FeedSection({ mobile }) {
               fontWeight: i === 0 ? 800 : 500, fontSize: 12.5, cursor: "pointer",
               padding: "6px 12px", borderRadius: 8,
               borderBottom: i === 0 ? "2px solid #6366f1" : "2px solid transparent",
-              fontFamily: "'Geist',sans-serif",
+              fontFamily: "'Syne',sans-serif",
             }}>{tab}</button>
           ))}
         </div>
@@ -380,8 +380,8 @@ function Navbar({ scrolled, isMobile }) {
       transition: "background 0.3s",
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff", fontFamily: "'Geist',sans-serif" }}>G</div>
-        <span style={{ fontSize: 14, fontWeight: 800, fontFamily: "'Geist',sans-serif", color: "#f1f1f9" }}>GK<span style={{ color: "#6366f1" }}>.</span>dev</span>
+        <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff", fontFamily: "'Syne',sans-serif" }}>G</div>
+        <span style={{ fontSize: 14, fontWeight: 800, fontFamily: "'Syne',sans-serif", color: "#f1f1f9" }}>GK<span style={{ color: "#6366f1" }}>.</span>dev</span>
       </div>
       {isMobile ? (
         <button style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Hire Me</button>
@@ -439,7 +439,7 @@ export default function Portfolio() {
     return () => { window.removeEventListener("scroll", onScroll); document.head.removeChild(style); };
   }, []);
 
-  const base = { minHeight: "100vh", background: "#0d0d1a", fontFamily: "'Geist',sans-serif", color: "#e2e8f0" };
+  const base = { minHeight: "100vh", background: "#0d0d1a", fontFamily: "'Lato',sans-serif", color: "#e2e8f0" };
 
   /* ── MOBILE ── */
   if (isMobile) {
