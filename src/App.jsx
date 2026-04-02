@@ -209,7 +209,7 @@ function ContactCard({ row }) {
     <Card>
       <SectionLabel>📬 Contact</SectionLabel>
       <div style={{ display: "flex", flexDirection: row ? "row" : "column", flexWrap: "wrap", gap: row ? 16 : 10 }}>
-        {[{ icon: "✉️", label: "gopikrsh@email.com" }, { icon: "📱", label: "+91 98765 43210" }, { icon: "🌐", label: "gopikrsh.dev" }].map(({ icon, label }) => (
+        {[{ icon: "✉️", label: "gopikrishee@gmail.com" }, { icon: "🌐", label: "www.gopikrishee.in" }].map(({ icon, label }) => (
           <div key={label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <span style={{ fontSize: 13 }}>{icon}</span>
             <span style={{ fontSize: 11.5, color: "#818cf8", cursor: "pointer" }}>{label}</span>
