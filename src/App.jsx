@@ -225,8 +225,8 @@ function SocialCard({ row }) {
     <Card>
       <SectionLabel>🔗 Social</SectionLabel>
       <div style={{ display: "flex", flexDirection: row ? "row" : "column", gap: 8, flexWrap: "wrap" }}>
-        {[{ icon: "💼", name: "LinkedIn", handle: "in/gopikrsh" }, { icon: "🐙", name: "GitHub", handle: "github/gopikrsh" }, { icon: "🐦", name: "Twitter/X", handle: "@gopikrsh" }].map(({ icon, name, handle }) => (
-          <div key={name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", borderRadius: 10, cursor: "pointer", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", flex: row ? 1 : "unset" }}>
+        {[{ icon: "💼", name: "LinkedIn", handle: "gopikrishee", url: "https://www.linkedin.com/in/gopikrishee/" }, { icon: "🐙", name: "GitHub", handle: "gopikrishee", url:"https://github.com/gopikrishee" }, { icon: "🐦", name: "Twitter/X", handle: "@gopikrishee", url:"https://x.com/gopikrishee" }].map(({ icon, name, handle, url }) => (
+          <div onClick={()=>window.open(url,'_blank')} key={name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", borderRadius: 10, cursor: "pointer", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.04)", flex: row ? 1 : "unset" }}>
             <span style={{ fontSize: 16 }}>{icon}</span>
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, color: "#9ca3af" }}>{name}</div>
