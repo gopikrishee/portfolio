@@ -243,12 +243,41 @@ function SocialCard({ row }) {
   );
 }
 
-function OpenToWork() {
+function OpenToWork({ status = "open-to-opportunities" }) {
+  const statusConfig = {
+    "open-to-opportunities": {
+      icon: "🟢",
+      title: "Open to Opportunities",
+      subtitle: "Available for freelance & fulltime",
+      textColor: "#34d399",
+      borderColor: "rgba(16,185,129,0.25)",
+      bgGradient: "linear-gradient(135deg,rgba(16,185,129,0.12),rgba(6,182,212,0.08))"
+    },
+    "open-to-conversations": {
+      icon: "🟡",
+      title: "Open to Conversations",
+      subtitle: "Exploring options passively",
+      textColor: "#fbbf24",
+      borderColor: "rgba(251,191,36,0.25)",
+      bgGradient: "linear-gradient(135deg,rgba(251,191,36,0.12),rgba(245,158,11,0.08))"
+    },
+    "not-available": {
+      icon: "🔴",
+      title: "Not Available",
+      subtitle: "Not currently looking",
+      textColor: "#f87171",
+      borderColor: "rgba(248,113,113,0.25)",
+      bgGradient: "linear-gradient(135deg,rgba(248,113,113,0.12),rgba(239,68,68,0.08))"
+    }
+  };
+
+  const config = statusConfig[status] || statusConfig["open-to-opportunities"];
+
   return (
-    <div style={{ background: "linear-gradient(135deg,rgba(16,185,129,0.12),rgba(6,182,212,0.08))", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 16, padding: "12px 16px", textAlign: "center" }}>
-      <span style={{ fontSize: 16 }}>🟢</span>
-      <div style={{ fontSize: 12, fontWeight: 800, color: "#34d399", letterSpacing: 0.3, marginTop: 2 }}>Open to Opportunities</div>
-      <div style={{ fontSize: 11, color: "#6b7280", marginTop: 2 }}>Available for freelance & fulltime</div>
+    <div style={{ background: config.bgGradient, border: `1px solid ${config.borderColor}`, borderRadius: 16, padding: "12px 16px", textAlign: "center" }}>
+      <span style={{ fontSize: 16 }}>{config.icon}</span>
+      <div style={{ fontSize: 12, fontWeight: 800, color: config.textColor, letterSpacing: 0.3, marginTop: 2 }}>{config.title}</div>
+      <div style={{ fontSize: 11, color: "#6b7280", marginTop: 2 }}>{config.subtitle}</div>
     </div>
   );
 }
@@ -406,6 +435,9 @@ function Navbar({ scrolled, isMobile }) {
 
 /* ─── Root ──────────────────────────────────────────────────── */
 export default function Portfolio() {
+  // Job search status configuration - easily toggleable between: "open-to-opportunities" | "open-to-conversations" | "not-available"
+  const jobSearchStatus = "open-to-opportunities";
+
   const bp = useBreakpoint();
   const [scrolled, setScrolled] = useState(false);
   const [mobileTab, setMobileTab] = useState("feed");
@@ -453,7 +485,7 @@ export default function Portfolio() {
           <ProfileCard mobile />
           <SkillsCard />
           <ExperienceCard />
-          <OpenToWork />
+          <OpenToWork status={jobSearchStatus} />
         </div>
       );
       if (mobileTab === "projects") return (
@@ -466,7 +498,6 @@ export default function Portfolio() {
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <ContactCard />
           <SocialCard />
-          <OpenToWork />
         </div>
       );
       return <FeedSection mobile />;
@@ -490,7 +521,7 @@ export default function Portfolio() {
             <ProfileCard />
             <SkillsCard />
             <ExperienceCard />
-            <OpenToWork />
+            <OpenToWork status={jobSearchStatus} />
           </div>
           <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 12 }}>
             <FeedSection />
@@ -515,10 +546,10 @@ export default function Portfolio() {
         </aside>
         <FeedSection />
         <aside style={{ width: 240, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
+          <OpenToWork status={jobSearchStatus} />
           <ProjectsCard />
           <ContactCard />
           <SocialCard />
-          <OpenToWork />
         </aside>
       </div>
     </div>
