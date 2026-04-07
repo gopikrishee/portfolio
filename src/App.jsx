@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import SectionLabel from "./components/SectionLabel";
 import ProjectsCard from "./components/ProjectsCard";
+import Navbar from "./components/Navbar";
 
 /* ─── Data ─────────────────────────────────────────────────── */
 const PROFILE = {
@@ -28,11 +29,6 @@ const BLOGS = [
   { id: 5, title: "Docker for .NET Developers: Getting Started", date: "Jan 30, 2026", tag: "Docker", preview: "Containers changed how I ship code. This beginner-friendly guide walks through dockerizing your first .NET 8 API with multi-stage builds and best practices.", readTime: "5 min read", likes: 89, comments: 18 },
 ];
 
-const PROJECTS = [
-  { name: "EnterprisePOS", desc: "WinForms POS system for retail chains", stars: 312, lang: "C#" },
-  { name: "K8s-DotNet-Helm", desc: "Helm charts for .NET microservices", stars: 87, lang: "YAML" },
-  { name: "ADO.Toolkit", desc: "Lightweight ADO.NET helper library", stars: 204, lang: "C#" },
-];
 
 const TAG_COLORS = {
   DevOps:       { bg: "rgba(99,102,241,0.15)",  text: "#818cf8", border: "rgba(99,102,241,0.3)" },
@@ -84,23 +80,6 @@ function SkillBadge({ skill }) {
   );
 }
 
-// function Card({ children, style = {} }) {
-//   return (
-//     <div style={{
-//       background: "#16162a", border: "1px solid rgba(255,255,255,0.06)",
-//       borderRadius: 16, padding: 16, boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
-//       ...style,
-//     }}>{children}</div>
-//   );
-// }
-
-// function SectionLabel({ children }) {
-//   return (
-//     <div style={{ fontSize: 11, color: "#6b7280", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>
-//       {children}
-//     </div>
-//   );
-// }
 
 /* ─── Profile Card ──────────────────────────────────────────── */
 function ProfileCard({ mobile }) {
@@ -187,26 +166,6 @@ function ExperienceCard() {
     </Card>
   );
 }
-
-// function ProjectsCard({ horizontal }) {
-//   return (
-//     <Card>
-//       <SectionLabel>📦 Recent Projects</SectionLabel>
-//       <div style={{ display: "flex", flexDirection: horizontal ? "row" : "column", gap: 10, overflowX: horizontal ? "auto" : "unset", paddingBottom: horizontal ? 4 : 0 }}>
-//         {PROJECTS.map((p, i) => (
-//           <div key={i} style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.12)", borderRadius: 10, padding: "10px 12px", cursor: "pointer", flexShrink: horizontal ? 0 : "unset", minWidth: horizontal ? 170 : "unset" }}>
-//             <div style={{ fontSize: 13, fontWeight: 700, color: "#a5b4fc", marginBottom: 3, fontFamily: "'Geist',monospace" }}>{p.name}</div>
-//             <div style={{ fontSize: 11, color: "#6b7280", lineHeight: 1.4 }}>{p.desc}</div>
-//             <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 6 }}>
-//               <span style={{ fontSize: 10.5, color: "#4b5563" }}>⭐ {p.stars}</span>
-//               <span style={{ fontSize: 9.5, background: "rgba(6,182,212,0.12)", color: "#22d3ee", border: "1px solid rgba(6,182,212,0.2)", borderRadius: 4, padding: "1px 6px", fontFamily: "'Geist',monospace" }}>{p.lang}</span>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </Card>
-//   );
-// }
 
 function ContactCard({ row }) {
   return (
@@ -397,38 +356,6 @@ function BottomNav({ active, setActive }) {
           {active === t.id && <div style={{ width: 4, height: 4, borderRadius: "50%", background: "#6366f1" }} />}
         </button>
       ))}
-    </nav>
-  );
-}
-
-/* ─── Navbar ────────────────────────────────────────────────── */
-function Navbar({ scrolled, isMobile }) {
-  return (
-    <nav style={{
-      position: "sticky", top: 0, zIndex: 100,
-      background: scrolled ? "rgba(13,13,26,0.95)" : "rgba(13,13,26,0.75)",
-      backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.06)",
-      padding: isMobile ? "10px 14px" : "12px 24px",
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      transition: "background 0.3s",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff", fontFamily: "'Geist',sans-serif" }}>G</div>
-        <span style={{ fontSize: 14, fontWeight: 800, fontFamily: "'Geist',sans-serif", color: "#f1f1f9" }}>GK<span style={{ color: "#6366f1" }}>.</span>dev</span>
-      </div>
-      {isMobile ? (
-        <button style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Hire Me</button>
-      ) : (
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          {["Blog", "Projects", "About", "Hire Me"].map((item, i) => (
-            <button key={item} style={{
-              background: i === 3 ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "transparent",
-              color: i === 3 ? "#fff" : "#9ca3af", border: "none", borderRadius: 8,
-              padding: i === 3 ? "6px 14px" : "6px 10px", fontSize: 12.5, fontWeight: i === 3 ? 700 : 500, cursor: "pointer",
-            }}>{item}</button>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }
