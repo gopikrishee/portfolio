@@ -29,6 +29,7 @@ function ProjectsCard({ horizontal }) {
         {repos.map((p, i) => (
           <div
             key={i}
+            onClick={() => window.open(p.url, "_blank")}
             style={{
               background: "rgba(99,102,241,0.06)",
               border: "1px solid rgba(99,102,241,0.12)",
@@ -37,6 +38,15 @@ function ProjectsCard({ horizontal }) {
               cursor: "pointer",
               flexShrink: horizontal ? 0 : "unset",
               minWidth: horizontal ? 170 : "unset",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(99,102,241,0.15)";
+              e.currentTarget.style.borderColor = "rgba(99,102,241,0.25)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(99,102,241,0.06)";
+              e.currentTarget.style.borderColor = "rgba(99,102,241,0.12)";
             }}
           >
             <div

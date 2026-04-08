@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import SectionLabel from "./components/SectionLabel";
 import ProjectsCard from "./components/ProjectsCard";
+import ContactCard from "./components/ContactCard";
 import Navbar from "./components/Navbar";
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -160,22 +161,6 @@ function ExperienceCard() {
               <div style={{ fontSize: 11, color: "#6b7280" }}>{exp.company}</div>
               <div style={{ fontSize: 10.5, color: "#4b5563", marginTop: 1 }}>{exp.years}</div>
             </div>
-          </div>
-        ))}
-      </div>
-    </Card>
-  );
-}
-
-function ContactCard({ row }) {
-  return (
-    <Card>
-      <SectionLabel>📬 Contact</SectionLabel>
-      <div style={{ display: "flex", flexDirection: row ? "row" : "column", flexWrap: "wrap", gap: row ? 16 : 10 }}>
-        {[{ icon: "✉️", label: "gopikrishee@gmail.com" }, { icon: "🌐", label: "www.gopikrishee.in" }].map(({ icon, label }) => (
-          <div key={label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 13 }}>{icon}</span>
-            <span style={{ fontSize: 11.5, color: "#818cf8", cursor: "pointer" }}>{label}</span>
           </div>
         ))}
       </div>
