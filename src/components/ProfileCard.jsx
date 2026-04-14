@@ -45,7 +45,18 @@ function ProfileCard({ profile, mobile }) {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, flexDirection: mobile ? "row" : "column" }}>
-          <button onMouseEnter={() => setRh(true)} onMouseLeave={() => setRh(false)} style={{
+          <button 
+            onClick={() => {
+              const link = document.createElement("a");
+              link.href = "/GOPI KRISHNAN S.pdf";
+              link.download = "GOPI KRISHNAN S.pdf";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+            onMouseEnter={() => setRh(true)} 
+            onMouseLeave={() => setRh(false)} 
+            style={{
             flex: mobile ? 1 : "unset",
             background: rh ? "linear-gradient(135deg,#5254cc,#7c3aed)" : "linear-gradient(135deg,#6366f1,#8b5cf6)",
             color: "#fff", border: "none", borderRadius: 10, padding: "9px 0", fontSize: 12.5, fontWeight: 700,
