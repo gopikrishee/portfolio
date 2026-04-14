@@ -1,16 +1,32 @@
-# React + Vite
+# Gopi Krish | Senior .NET Developer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Passionate about building enterprise-grade software with clean architecture. I craft robust systems that scale — from WinForms to Kubernetes.
 
-Currently, two official plugins are available:
+## 📍 Location
+Kanyakumari, Tamil Nadu 🇮🇳
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Skills
+- **Languages & Frameworks:** C#, .NET, WinForms, ADO.NET, Entity Framework, REST APIs
+- **DevOps & Cloud:** Kubernetes, Docker, Azure, CI/CD
+- **Databases:** SQL Server
+- **Architecture:** Clean Architecture, Scalable Systems
 
-## React Compiler
+## 💼 Experience
+- **Senior .NET Developer** @ TechCorp Solutions (2019 – Present)
+- **.NET Developer** @ InfoSystems Pvt Ltd (2015 – 2019)
+- **Junior Developer** @ CodeBase India (2013 – 2015)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✍️ Recent Blog Posts
+- **Kubernetes Deployment Strategies for .NET Apps** - Managing zero-downtime deploys for large-scale enterprise applications.
+- **ADO.NET vs Entity Framework: When to Choose What** - A performance-based comparison after 10+ years of experience.
+- **Migrating a Legacy WinForms App to .NET 8** - A practical guide to modernizing 12-year-old codebases.
+- **Clean Architecture in C#: A Practical Guide** - Implementing domain layers, use cases, and dependency injection in production.
+- **Docker for .NET Developers: Getting Started** - Multi-stage builds and best practices for dockerizing .NET 8 APIs.
 
-## Expanding the ESLint configuration
+## 🔗 Connect with Me
+- [LinkedIn](https://www.linkedin.com/in/gopikrishee/)
+- [GitHub](https://github.com/gopikrishee)
+- [Twitter/X](https://x.com/gopikrishee)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+*Built with React + Vite*
