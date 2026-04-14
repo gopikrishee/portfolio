@@ -16,7 +16,6 @@ function Avatar({ size = 76, profile }) {
 
 function ProfileCard({ profile, mobile }) {
   const [rh, setRh] = useState(false);
-  const [ph, setPh] = useState(false);
   return (
     <Card style={{ padding: 0, overflow: "hidden" }}>
       <div style={{ height: mobile ? 56 : 70, background: "linear-gradient(135deg,#1e1e3f 0%,#2d1b4e 40%,#0f2a3f 100%)", position: "relative" }}>
@@ -55,13 +54,6 @@ function ProfileCard({ profile, mobile }) {
             cursor: "pointer", width: mobile ? undefined : "100%", transition: "all 0.2s",
             boxShadow: rh ? "0 6px 20px rgba(99,102,241,0.4)" : "0 2px 8px rgba(99,102,241,0.2)",
           }}>📄 Download Resume</button>
-          <button onMouseEnter={() => setPh(true)} onMouseLeave={() => setPh(false)} style={{
-            flex: mobile ? 1 : "unset",
-            background: "transparent", color: ph ? "#a5b4fc" : "#818cf8",
-            border: `1px solid ${ph ? "#818cf8" : "rgba(99,102,241,0.35)"}`, borderRadius: 10,
-            padding: "9px 0", fontSize: 12.5, fontWeight: 700, cursor: "pointer",
-            width: mobile ? undefined : "100%", transition: "all 0.2s",
-          }}>🔗 View Full Profile</button>
         </div>
       </div>
     </Card>
