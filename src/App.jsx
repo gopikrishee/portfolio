@@ -5,6 +5,7 @@ import SectionLabel from "./components/SectionLabel";
 import ProjectsCard from "./components/ProjectsCard";
 import ContactCard from "./components/ContactCard";
 import { ProfileCard, Avatar } from "./components/ProfileCard";
+import ExperienceCard from "./components/ExperienceCard";
 import SkillsCard from "./components/SkillsCard";
 import Navbar from "./components/Navbar";
 
@@ -13,13 +14,14 @@ const PROFILE = {
   name: "Gopi Krish",
   title: "Senior .NET Developer",
   avatar: "GK",
-  bio: "Passionate about building enterprise-grade software with clean architecture. I craft robust systems that scale — from WinForms to Kubernetes.",
+  bio: "Passionate about building enterprise-grade software with clean architecture. I craft robust systems that scale — from .NET framework to .NET",
   location: "Kanyakumari, Tamil Nadu 🇮🇳",
   skills: ["C# / .NET 10", "VB.NET", ".NET Framework", "ReactJs", "Gemini", "SQL Server", "NoSQL", "Azure", "Entity Framework", "CI/CD"],
   experience: [
-    { company: "TechCorp Solutions", role: "Senior .NET Developer", years: "2019 – Present" },
-    { company: "InfoSystems Pvt Ltd", role: ".NET Developer", years: "2015 – 2019" },
-    { company: "CodeBase India", role: "Junior Developer", years: "2013 – 2015" },
+    { company: "Trantor", role: "Associate Tech Lead", years: "2025 – Present" },
+    { company: "Ascendion", role: "Senior Software Engineer", years: "2023 – 2025" },
+    { company: "Club Operations Pyt Ltd", role: "Senior Software Engineer", years: "2017 – 2023" },
+    { company: "Cognizant", role: "Programmer Analyst", years: "2014 – 2017" },
   ],
   stats: { posts: 42, followers: "1.2K", following: 318 },
 };
@@ -59,26 +61,6 @@ function useBreakpoint() {
 }
 
 /* ─── Shared atoms ──────────────────────────────────────────── */
-function ExperienceCard() {
-  return (
-    <Card>
-      <SectionLabel>Experience</SectionLabel>
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {PROFILE.experience.map((exp, i) => (
-          <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", marginTop: 4, flexShrink: 0, background: i === 0 ? "#6366f1" : "rgba(99,102,241,0.35)" }} />
-            <div>
-              <div style={{ fontSize: 12.5, fontWeight: 700, color: i === 0 ? "#e2e8f0" : "#9ca3af" }}>{exp.role}</div>
-              <div style={{ fontSize: 11, color: "#6b7280" }}>{exp.company}</div>
-              <div style={{ fontSize: 10.5, color: "#4b5563", marginTop: 1 }}>{exp.years}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Card>
-  );
-}
-
 function SocialCard({ row }) {
   return (
     <Card>
@@ -307,7 +289,7 @@ export default function Portfolio() {
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} mobile />
           <SkillsCard skills={PROFILE.skills} />
-          <ExperienceCard />
+          <ExperienceCard experience={PROFILE.experience} />
           <OpenToWork status={jobSearchStatus} />
         </div>
       );
@@ -343,7 +325,7 @@ export default function Portfolio() {
           <div style={{ width: 252, flexShrink: 0, display: "flex", flexDirection: "column", gap: 12, position: "sticky", top: 20, height: "fit-content" }}>
             <ProfileCard profile={PROFILE} />
             <SkillsCard skills={PROFILE.skills} />
-            <ExperienceCard />
+            <ExperienceCard experience={PROFILE.experience} />
             <OpenToWork status={jobSearchStatus} />
           </div>
           <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 12 }}>
@@ -365,7 +347,7 @@ export default function Portfolio() {
         <aside style={{ width: 260, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} />
           <SkillsCard skills={PROFILE.skills} />
-          <ExperienceCard />
+          <ExperienceCard experience={PROFILE.experience} />
         </aside>
         <FeedSection />
         <aside style={{ width: 240, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
