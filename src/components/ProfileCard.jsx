@@ -38,13 +38,11 @@ function ProfileCard({ profile, mobile }) {
         <div style={{ fontSize: 11.5, color: "#6b7280", marginBottom: 12, display: "flex", alignItems: "center", gap: 4 }}>
           <span>📍</span> {profile.location}
         </div>
-        <div style={{ display: "flex", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "10px 0", marginBottom: 14 }}>
-          {[["Posts", profile.stats.posts], ["Followers", profile.stats.followers], ["Following", profile.stats.following]].map(([l, v]) => (
-            <div key={l} style={{ flex: 1, textAlign: "center" }}>
-              <div style={{ fontSize: 15, fontWeight: 800, color: "#e2e8f0", fontFamily: "'Geist',sans-serif" }}>{v}</div>
-              <div style={{ fontSize: 10, color: "#6b7280", letterSpacing: 0.5 }}>{l}</div>
-            </div>
-          ))}
+        <div style={{ display: "flex", justifyContent: "center", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "10px 0", marginBottom: 14 }}>
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#e2e8f0", fontFamily: "'Geist',sans-serif" }}>{profile.stats.posts}</div>
+            <div style={{ fontSize: 10, color: "#6b7280", letterSpacing: 0.5 }}>Posts</div>
+          </div>
         </div>
         <div style={{ display: "flex", gap: 8, flexDirection: mobile ? "row" : "column" }}>
           <button onMouseEnter={() => setRh(true)} onMouseLeave={() => setRh(false)} style={{
