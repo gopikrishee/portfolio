@@ -5,6 +5,7 @@ import SectionLabel from "./components/SectionLabel";
 import ProjectsCard from "./components/ProjectsCard";
 import ContactCard from "./components/ContactCard";
 import { ProfileCard, Avatar } from "./components/ProfileCard";
+import SkillsCard from "./components/SkillsCard";
 import Navbar from "./components/Navbar";
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -14,7 +15,7 @@ const PROFILE = {
   avatar: "GK",
   bio: "Passionate about building enterprise-grade software with clean architecture. I craft robust systems that scale — from WinForms to Kubernetes.",
   location: "Kanyakumari, Tamil Nadu 🇮🇳",
-  skills: ["C# / .NET", "WinForms", "ADO.NET", "Kubernetes", "Docker", "SQL Server", "REST APIs", "Azure", "Entity Framework", "CI/CD"],
+  skills: ["C# / .NET 10", "VB.NET", ".NET Framework", "ReactJs", "Gemini", "SQL Server", "NoSQL", "Azure", "Entity Framework", "CI/CD"],
   experience: [
     { company: "TechCorp Solutions", role: "Senior .NET Developer", years: "2019 – Present" },
     { company: "InfoSystems Pvt Ltd", role: ".NET Developer", years: "2015 – 2019" },
@@ -58,29 +59,6 @@ function useBreakpoint() {
 }
 
 /* ─── Shared atoms ──────────────────────────────────────────── */
-function SkillBadge({ skill }) {
-  return (
-    <span style={{
-      background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)",
-      color: "#a5b4fc", borderRadius: 6, padding: "3px 10px",
-      fontSize: 11, fontWeight: 600, letterSpacing: 0.3,
-      fontFamily: "Geist,monospace",
-    }}>{skill}</span>
-  );
-}
-
-
-function SkillsCard() {
-  return (
-    <Card>
-      <SectionLabel>Skills</SectionLabel>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-        {PROFILE.skills.map(s => <SkillBadge key={s} skill={s} />)}
-      </div>
-    </Card>
-  );
-}
-
 function ExperienceCard() {
   return (
     <Card>
@@ -328,7 +306,7 @@ export default function Portfolio() {
       if (mobileTab === "profile") return (
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} mobile />
-          <SkillsCard />
+          <SkillsCard skills={PROFILE.skills} />
           <ExperienceCard />
           <OpenToWork status={jobSearchStatus} />
         </div>
@@ -364,7 +342,7 @@ export default function Portfolio() {
         <div style={{ maxWidth: 860, margin: "0 auto", padding: "20px 16px", display: "flex", gap: 14, alignItems: "flex-start" }}>
           <div style={{ width: 252, flexShrink: 0, display: "flex", flexDirection: "column", gap: 12, position: "sticky", top: 20, height: "fit-content" }}>
             <ProfileCard profile={PROFILE} />
-            <SkillsCard />
+            <SkillsCard skills={PROFILE.skills} />
             <ExperienceCard />
             <OpenToWork status={jobSearchStatus} />
           </div>
@@ -386,7 +364,7 @@ export default function Portfolio() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 16px", display: "flex", gap: 16, alignItems: "flex-start" }}>
         <aside style={{ width: 260, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} />
-          <SkillsCard />
+          <SkillsCard skills={PROFILE.skills} />
           <ExperienceCard />
         </aside>
         <FeedSection />
