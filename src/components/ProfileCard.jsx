@@ -22,7 +22,7 @@ function ProfileCard({ profile, mobile }) {
       <div style={{ height: mobile ? 56 : 70, background: "linear-gradient(135deg,#1e1e3f 0%,#2d1b4e 40%,#0f2a3f 100%)", position: "relative" }}>
         <div style={{ position: "absolute", inset: 0, opacity: 0.4, backgroundImage: "repeating-linear-gradient(45deg,rgba(99,102,241,0.1) 0px,rgba(99,102,241,0.1) 1px,transparent 1px,transparent 10px)" }} />
       </div>
-      <div style={{ padding: "0 18px 18px" }}>
+      <div style={{ padding: "0 18px 18px", position: "relative" }}>
         <div style={{ marginTop: mobile ? -30 : -38, marginBottom: 10, display: "flex", alignItems: "flex-end", justifyContent: mobile ? "space-between" : "flex-start" }}>
           <Avatar size={mobile ? 60 : 76} profile={profile} />
           {mobile && (
