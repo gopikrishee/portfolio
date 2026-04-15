@@ -6,12 +6,30 @@ import useGitHub from "../hooks/useGitHub";
 function ProjectsCard({ horizontal }) {
   const { repos, loading, error, refetch } = useGitHub("gopikrishee");
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <Card>
+        <SectionLabel>📦 Recent Projects</SectionLabel>
+        <div className="flex justify-center items-center py-10">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+        </div>
+      </Card>
+    );
   if (error)
     return (
-      <p>
-        Error: {error} <button onClick={refetch}>Retry</button>
-      </p>
+      <Card>
+        <SectionLabel>📦 Recent Projects</SectionLabel>
+        <div className="flex flex-col justify-center items-center py-10 gap-2">
+          <div className="text-red-400 text-3xl">⚠️</div>
+          <p className="text-sm text-gray-400 text-center">Failed to load projects. Please come back after an hour</p>
+          <button
+            onClick={refetch}
+            className="flex items-center justify-center p-2 rounded-full hover:opacity-90 transition-all text-white text-lg"
+          >
+            ⟳
+          </button>
+        </div>
+      </Card>
     );
 
   return (
