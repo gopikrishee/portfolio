@@ -173,6 +173,8 @@ function BlogCard({ post, index, mobile }) {
 
 /* ─── Feed Section ──────────────────────────────────────────── */
 function FeedSection({ mobile }) {
+  const [filter, setFilter] = useState("Latest Posts");
+  const filteredBlogs = filter === "Popular" ? BLOGS.filter(b => b.likes > 100) : BLOGS;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 0 }}>
       <div style={{
@@ -183,21 +185,21 @@ function FeedSection({ mobile }) {
         position: "sticky", top: mobile ? 50 : 0, zIndex: 9,
       }}>
         <div style={{ display: "flex" }}>
-          {["Latest Posts", "Popular"].map((tab, i) => (
-            <button key={tab} style={{
-              background: i === 0 ? "rgba(99,102,241,0.15)" : "none",
-              border: "none", color: i === 0 ? "#818cf8" : "#6b7280",
-              fontWeight: i === 0 ? 800 : 500, fontSize: 12.5, cursor: "pointer",
+          {["Latest Posts", "Popular"].map((tab) => (
+            <button key={tab} onClick={() => setFilter(tab)} style={{
+              background: filter === tab ? "rgba(99,102,241,0.15)" : "none",
+              border: "none", color: filter === tab ? "#818cf8" : "#6b7280",
+              fontWeight: filter === tab ? 800 : 500, fontSize: 12.5, cursor: "pointer",
               padding: "6px 12px", borderRadius: 8,
-              borderBottom: i === 0 ? "2px solid #6366f1" : "2px solid transparent",
+              borderBottom: filter === tab ? "2px solid #6366f1" : "2px solid transparent",
               fontFamily: "'Geist',sans-serif",
             }}>{tab}</button>
           ))}
         </div>
-        <span style={{ fontSize: 11, color: "#4b5563" }}>{BLOGS.length} posts</span>
+        <span style={{ fontSize: 11, color: "#4b5563" }}>{filteredBlogs.length} posts</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 2, background: "rgba(255,255,255,0.015)" }}>
-        {BLOGS.map((post, i) => <BlogCard key={post.id} post={post} index={i} mobile={mobile} />)}
+        {filteredBlogs.map((post, i) => <BlogCard key={post.id} post={post} index={i} mobile={mobile} />)}
       </div>
       <div style={{ padding: 16, textAlign: "center" }}>
         <button style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", color: "#818cf8", borderRadius: 10, padding: "10px 24px", fontSize: 12.5, fontWeight: 700, cursor: "pointer" }}>
