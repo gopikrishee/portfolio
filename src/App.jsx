@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Card from "./components/Card";
 import SectionLabel from "./components/SectionLabel";
@@ -164,7 +165,7 @@ function BlogCard({ post, index, mobile }) {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {!mobile && <span style={{ fontSize: 11, color: "#4b5563" }}>⏱ {post.readTime}</span>}
-          <button style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "5px 12px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Read More →</button>
+          <Link to={`/blog/${post.id}`} style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", textDecoration: "none", borderRadius: 8, padding: "5px 12px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Read More →</Link>
         </div>
       </div>
     </article>
