@@ -84,15 +84,12 @@ function SocialCard({ row }) {
 function OpenToWork({ status = "open-to-opportunities" }) {
   const statusConfig = {
     "open-to-opportunities": {
-      title: (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-          Powered by <img src="/google-gemini-icon.svg" alt="Gemini" style={{ height: 16 }} /> & <img src="/claude-ai-icon.svg" alt="Claude" style={{ height: 16 }} />
-        </div>
-      ),
-      subtitle: "LLM-orchestrated Portfolio",
-      textColor: "#f472b6",
-      borderColor: "rgba(244,114,182,0.25)",
-      bgGradient: "linear-gradient(135deg,rgba(244,114,182,0.12),rgba(192,38,211,0.08))"
+      icon: "🟢",
+      title: "Open to Opportunities",
+      subtitle: "Available for freelance & fulltime",
+      textColor: "#34d399",
+      borderColor: "rgba(16,185,129,0.25)",
+      bgGradient: "linear-gradient(135deg,rgba(16,185,129,0.12),rgba(6,182,212,0.08))"
     },
     "open-to-conversations": {
       icon: "🟡",
@@ -116,6 +113,7 @@ function OpenToWork({ status = "open-to-opportunities" }) {
 
   return (
     <div style={{ background: config.bgGradient, border: `1px solid ${config.borderColor}`, borderRadius: 16, padding: "12px 16px", textAlign: "center" }}>
+      <span style={{ fontSize: 16 }}>{config.icon}</span>
       <div style={{ fontSize: 12, fontWeight: 800, color: config.textColor, letterSpacing: 0.3, marginTop: 2 }}>{config.title}</div>
       <div style={{ fontSize: 11, color: "#6b7280", marginTop: 2 }}>{config.subtitle}</div>
     </div>
