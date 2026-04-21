@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Navbar({ scrolled, isMobile }) {
   return (
     <nav style={{
@@ -9,7 +11,9 @@ export default function Navbar({ scrolled, isMobile }) {
       transition: "background 0.3s",
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff", fontFamily: "'Geist',sans-serif" }}>G</div>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff", fontFamily: "'Geist',sans-serif" }}>G</div>
+        </Link>
       </div>
       {isMobile ? (
         <button style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Hire Me</button>
