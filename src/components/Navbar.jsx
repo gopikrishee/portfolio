@@ -16,16 +16,14 @@ export default function Navbar({ scrolled, isMobile }) {
         </Link>
       </div>
       {isMobile ? (
-        <button style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Hire Me</button>
+        <Link to="/blogs" style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}>Blogs</Link>
       ) : (
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          {["Hire Me"].map((item, i) => (
-            <button key={item} style={{
-              background: i === 0 ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "transparent",
-              color: i === 0 ? "#fff" : "#9ca3af", border: "none", borderRadius: 8,
-              padding: i === 0 ? "6px 14px" : "6px 10px", fontSize: 12.5, fontWeight: i === 0 ? 700 : 500, cursor: "pointer",
-            }}>{item}</button>
-          ))}
+          <Link to="/blogs" style={{
+            background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
+            color: "#fff", border: "none", borderRadius: 8,
+            padding: "6px 14px", fontSize: 12.5, fontWeight: 700, cursor: "pointer", textDecoration: "none"
+          }}>Blogs</Link>
         </div>
       )}
     </nav>

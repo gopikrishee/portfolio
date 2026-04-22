@@ -56,43 +56,6 @@ src/
 
 ---
 
-## Component Rules
-
-- **One component per file.** No multi-component files.
-- Use **functional components** only — no class components.
-- Keep components **small and single-purpose**. If a component exceeds ~150 lines, split it.
-- Separate **UI (presentational)** from **logic (container/hooks)**:
-  - Presentational: receives props, renders JSX, no side effects.
-  - Logic: lives in a custom hook; handles state, effects, and API calls.
-- Define **prop types** with PropTypes directly below the component definition:
-
-```jsx
-import PropTypes from 'prop-types';
-
-export function UserCard({ userId, onClose }) { ... }
-
-UserCard.propTypes = {
-  userId: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
-```
-
-- Define **defaultProps** for any optional prop that has a sensible default.
-- Use **named exports** for components, not default exports (except for pages/routes if required by router).
-- Destructure props in the function signature — do not access via `props.x` inside the body.
-
----
-
-## Hooks
-
-- One hook per file. File name must match hook name: `useAuth.js` exports `useAuth`.
-- Hooks must start with `use`.
-- Hooks own their side effects (`useEffect`) and expose only what callers need.
-- Do not call hooks conditionally.
-- Extract repeated `useEffect` + `useState` patterns into a custom hook immediately.
-
----
-
 ## JavaScript Standards
 
 - Use **ES2020+ syntax**: optional chaining (`?.`), nullish coalescing (`??`), `async/await`, destructuring, spread.
@@ -124,23 +87,6 @@ export async function fetchUser(id) { ... }
 
 ---
 
-## Services & API Layer
-
-- All API calls live in `src/api/`
-- **No `fetch` or `axios` calls inside components or hooks directly** — always delegate to a service function.
-- Service functions are plain async functions, not hooks.
-- Handle errors explicitly — do not swallow them silently.
-
-```js
-// src/api/userApi.js
-export async function fetchUser(id) {
-  const res = await apiClient.get(`/users/${id}`);
-  return res.data;
-}
-```
-
----
-
 ## Styling
 
 - Use the project's chosen styling approach consistently — do not mix strategies.
@@ -159,7 +105,6 @@ export async function fetchUser(id) {
 - **Pure functions**: utility functions in `src/utils/` must be pure — no side effects, no external state.
 - **Early returns**: prefer guard clauses over deeply nested `if/else`.
 - **Avoid magic numbers/strings**: extract them as named constants.
-- **Error Handling**: All API calls must include try/catch blocks
 
 ---
 
