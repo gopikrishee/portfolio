@@ -11,7 +11,7 @@ This project is a personal portfolio website for a Senior .NET Developer. It is 
 - **Architecture:** Component-based UI with data often fetched from External API (see `src/api/githubApi.js` and `src/hooks/useGitHub.js`).
 - **Language**: JavaScript (ES2020+)
 - **Package Manager**: npm (use `npm`)
-- **Styling**: [Tailwind CSS / CSS Modules / styled-components]
+- **Styling**: Tailwind CSS
 - **State Management**: [Redux Toolkit / Context API]
 - **Routing**: React Router v6
 
@@ -90,7 +90,7 @@ export async function fetchUser(id) { ... }
 ## Styling
 
 - Use the project's chosen styling approach consistently — do not mix strategies.
-- Avoid inline styles except for truly dynamic values (e.g., calculated widths).
+- Always use Tailwind CSS styling 
 - Keep style logic out of business logic.
 - Responsive design: mobile-first approach.
 

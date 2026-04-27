@@ -1,9 +1,9 @@
 import Card from "./Card";
 import SectionLabel from "./SectionLabel";
 
-function ContactCard({ row }) {
+function ContactCard({ row, email }) {
   const handleEmailClick = () => {
-    window.location.href = "mailto:gopikrishee@gmail.com";
+    window.location.href = `mailto:${email}`;
   };
 
   const handleWebsiteClick = () => {
@@ -27,7 +27,7 @@ function ContactCard({ row }) {
             onMouseEnter={(e) => (e.target.style.color = "#a5b4fc")}
             onMouseLeave={(e) => (e.target.style.color = "#818cf8")}
           >
-            gopikrishee@gmail.com
+            {email}
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

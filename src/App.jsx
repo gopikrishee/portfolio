@@ -9,23 +9,17 @@ import { ProfileCard, Avatar } from "./components/ProfileCard";
 import ExperienceCard from "./components/ExperienceCard";
 import SkillsCard from "./components/SkillsCard";
 import Navbar from "./components/Navbar";
+import { useFetchUser } from "./hooks/useFetchUser";
 
 /* ─── Data ─────────────────────────────────────────────────── */
-const PROFILE = {
-  name: "Gopi Krish",
-  title: "Senior .NET Developer",
-  avatar: "GK",
-  bio: "Passionate about building enterprise-grade software with clean architecture. I craft robust systems that scale — from .NET framework to .NET",
-  location: "Kanyakumari, Tamil Nadu 🇮🇳",
-  skills: ["C# / .NET 10", "VB.NET", ".NET Framework", "ReactJs", "Gemini", "SQL Server", "NoSQL", "Azure", "Entity Framework", "CI/CD"],
-  experience: [
-    { company: "Trantor", role: "Associate Tech Lead", years: "2025 – Present" },
-    { company: "Ascendion", role: "Senior Software Engineer", years: "2023 – 2025" },
-    { company: "Club Operations Pyt Ltd", role: "Senior Software Engineer", years: "2017 – 2023" },
-    { company: "Cognizant", role: "Programmer Analyst", years: "2014 – 2017" },
-  ],
-  stats: { posts: 42, followers: "1.2K", following: 318 },
-};
+const HARDCODED_STATS = { posts: 42, followers: "1.2K", following: 318 };
+const HARDCODED_SKILLS = ["C# / .NET 10", "VB.NET", ".NET Framework", "ReactJs", "Gemini", "SQL Server", "NoSQL", "Azure", "Entity Framework", "CI/CD"];
+const HARDCODED_EXPERIENCE = [
+  { company: "Trantor", role: "Associate Tech Lead", years: "2025 – Present" },
+  { company: "Ascendion", role: "Senior Software Engineer", years: "2023 – 2025" },
+  { company: "Club Operations Pyt Ltd", role: "Senior Software Engineer", years: "2017 – 2023" },
+  { company: "Cognizant", role: "Programmer Analyst", years: "2014 – 2017" },
+];
 
 const BLOGS = [
   { id: 1, title: "Kubernetes Deployment Strategies for .NET Apps", date: "Mar 18, 2026", tag: "DevOps", preview: "Rolling updates, blue-green deployments, and canary releases — here's how I manage zero-downtime deploys for large-scale enterprise .NET applications running on K8s clusters.", readTime: "8 min read", likes: 94, comments: 12 },
@@ -34,7 +28,6 @@ const BLOGS = [
   { id: 4, title: "Clean Architecture in C#: A Practical Guide", date: "Feb 14, 2026", tag: "Architecture", preview: "Forget the theory — here's how I implement Clean Architecture in real production projects. Domain layers, use cases, and dependency injection done right.", readTime: "7 min read", likes: 176, comments: 33 },
   { id: 5, title: "Docker for .NET Developers: Getting Started", date: "Jan 30, 2026", tag: "Docker", preview: "Containers changed how I ship code. This beginner-friendly guide walks through dockerizing your first .NET 8 API with multi-stage builds and best practices.", readTime: "5 min read", likes: 89, comments: 18 },
 ];
-
 
 const TAG_COLORS = {
   DevOps:       { bg: "rgba(99,102,241,0.15)",  text: "#818cf8", border: "rgba(99,102,241,0.3)" },
@@ -123,7 +116,7 @@ function OpenToWork({ status = "open-to-opportunities" }) {
 }
 
 /* ─── Blog Card ─────────────────────────────────────────────── */
-function BlogCard({ post, index, mobile }) {
+function BlogCard({ post, index, mobile, profile }) {
   const [hovered, setHovered] = useState(false);
   const [liked, setLiked] = useState(false);
   const tag = TAG_COLORS[post.tag] || TAG_COLORS.Backend;
@@ -142,13 +135,13 @@ function BlogCard({ post, index, mobile }) {
         animationDelay: `${index * 0.07}s`, opacity: 0,
       }}>
       <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 10 }}>
-        <Avatar size={mobile ? 38 : 46} profile={PROFILE} />
+        <Avatar size={mobile ? 38 : 46} profile={profile} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-            <span style={{ fontSize: mobile ? 13 : 14, fontWeight: 800, color: "#f1f1f9", fontFamily: "'Geist',sans-serif" }}>{PROFILE.name}</span>
+            <span style={{ fontSize: mobile ? 13 : 14, fontWeight: 800, color: "#f1f1f9", fontFamily: "'Geist',sans-serif" }}>{profile.name}</span>
             <span style={{ fontSize: 11, color: "#4b5563" }}>@gopikrsh · {post.date}</span>
           </div>
-          <div style={{ fontSize: 10.5, color: "#6b7280" }}>{PROFILE.title}</div>
+          <div style={{ fontSize: 10.5, color: "#6b7280" }}>{profile.title}</div>
         </div>
         <span style={{ background: tag.bg, color: tag.text, border: `1px solid ${tag.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{post.tag}</span>
       </div>
@@ -175,7 +168,7 @@ function BlogCard({ post, index, mobile }) {
 }
 
 /* ─── Feed Section ──────────────────────────────────────────── */
-function FeedSection({ mobile }) {
+function FeedSection({ mobile, profile }) {
   const [filter, setFilter] = useState("Latest Posts");
   const filteredBlogs = filter === "Popular" ? BLOGS.filter(b => b.likes > 100) : BLOGS;
   return (
@@ -202,7 +195,7 @@ function FeedSection({ mobile }) {
         <span style={{ fontSize: 11, color: "#4b5563" }}>{filteredBlogs.length} posts</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 2, background: "rgba(255,255,255,0.015)" }}>
-        {filteredBlogs.map((post, i) => <BlogCard key={post.id} post={post} index={i} mobile={mobile} />)}
+        {filteredBlogs.map((post, i) => <BlogCard key={post.id} post={post} index={i} mobile={mobile} profile={profile} />)}
       </div>
       <div style={{ padding: 16, textAlign: "center" }}>
         <button style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", color: "#818cf8", borderRadius: 10, padding: "10px 24px", fontSize: 12.5, fontWeight: 700, cursor: "pointer" }}>
@@ -245,14 +238,11 @@ function BottomNav({ active, setActive }) {
 
 /* ─── Root ──────────────────────────────────────────────────── */
 export default function Portfolio() {
-  // Job search status configuration - easily toggleable between: "open-to-opportunities" | "open-to-conversations" | "not-available"
-  const jobSearchStatus = "open-to-opportunities";
-
+  const { data: userData, loading, error } = useFetchUser();
   const bp = useBreakpoint();
+  
   const [scrolled, setScrolled] = useState(false);
   const [mobileTab, setMobileTab] = useState("feed");
-  const isMobile  = bp === "mobile";
-  const isTablet  = bp === "tablet";
 
   useEffect(() => {
     const style = document.createElement("style");
@@ -271,7 +261,6 @@ export default function Portfolio() {
     `;
     document.head.appendChild(style);
 
-    // Ensure proper mobile viewport
     let vp = document.querySelector('meta[name="viewport"]');
     if (!vp) {
       vp = document.createElement("meta");
@@ -285,6 +274,28 @@ export default function Portfolio() {
     return () => { window.removeEventListener("scroll", onScroll); document.head.removeChild(style); };
   }, []);
 
+  if (loading) return (
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0d0d1a" }}>
+      <div className="animate-spin rounded-full h-10 w-10 border-b-4 border-indigo-500"></div>
+    </div>
+  );
+  if (error || !userData) return <div style={{ color: "#fff", padding: 20 }}>Error loading profile.</div>;
+
+  const PROFILE = {
+    userName: userData.userName,
+    title: userData.title,
+    avatar: userData.userName.split(' ').map(n => n[0]).join(''),
+    bio: userData.bio,
+    location: userData.location,
+    skills: userData.skills,
+    experience: userData.experience,
+    stats: { posts: 42, followers: "1.2K", following: 318 },
+  };
+
+  const jobSearchStatus = "open-to-opportunities";
+  const isMobile  = bp === "mobile";
+  const isTablet  = bp === "tablet";
+
   const base = { minHeight: "100vh", background: "#0d0d1a", fontFamily: "'Geist',sans-serif", color: "#e2e8f0" };
 
   /* ── MOBILE ── */
@@ -293,7 +304,7 @@ export default function Portfolio() {
       if (mobileTab === "profile") return (
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} mobile />
-          <SkillsCard skills={PROFILE.skills} />
+          <SkillsCard profile={PROFILE} />
           <ExperienceCard experience={PROFILE.experience} />
           <OpenToWork status={jobSearchStatus} />
         </div>
@@ -306,11 +317,11 @@ export default function Portfolio() {
       );
       if (mobileTab === "contact") return (
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <ContactCard />
+          <ContactCard email={userData.email} />
           <SocialCard />
         </div>
       );
-      return <FeedSection mobile />;
+      return <FeedSection mobile profile={PROFILE} />;
     };
     return (
       <div style={base}>
@@ -329,14 +340,14 @@ export default function Portfolio() {
         <div style={{ maxWidth: 860, margin: "0 auto", padding: "20px 16px", display: "flex", gap: 14, alignItems: "flex-start" }}>
           <div style={{ width: 252, flexShrink: 0, display: "flex", flexDirection: "column", gap: 12, position: "sticky", top: 20, height: "fit-content" }}>
             <ProfileCard profile={PROFILE} />
-            <SkillsCard skills={PROFILE.skills} />
+            <SkillsCard profile={PROFILE} />
             <ExperienceCard experience={PROFILE.experience} />
             <OpenToWork status={jobSearchStatus} />
           </div>
           <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-            <FeedSection />
+            <FeedSection profile={PROFILE} />
             <ProjectsCard horizontal />
-            <ContactCard row />
+            <ContactCard email={userData.email} row />
             <SocialCard row />
           </div>
         </div>
@@ -351,14 +362,14 @@ export default function Portfolio() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 16px", display: "flex", gap: 16, alignItems: "flex-start" }}>
         <aside style={{ width: 260, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} />
-          <SkillsCard skills={PROFILE.skills} />
+          <SkillsCard profile={PROFILE} />
           <ExperienceCard experience={PROFILE.experience} />
         </aside>
-        <FeedSection />
+        <FeedSection profile={PROFILE} />
         <aside style={{ width: 240, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
           <OpenToWork status={jobSearchStatus} />
           <ProjectsCard />
-          <ContactCard />
+          <ContactCard email={userData.email} />
           <SocialCard />
         </aside>
       </div>

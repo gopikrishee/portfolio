@@ -12,12 +12,12 @@ function SkillBadge({ skill }) {
   );
 }
 
-export default function SkillsCard({ skills }) {
+export default function SkillsCard({ profile }) {
   return (
     <Card>
       <SectionLabel>Skills</SectionLabel>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-        {skills.map(s => <SkillBadge key={s} skill={s} />)}
+        {profile.skills.map(s => <SkillBadge key={s} skill={s} />)}
       </div>
     </Card>
   );

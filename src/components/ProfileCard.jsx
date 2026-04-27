@@ -32,7 +32,7 @@ function ProfileCard({ profile, mobile }) {
             </div>
           )}
         </div>
-        <div style={{ fontSize: mobile ? 16 : 18, fontWeight: 800, color: "#f1f1f9", letterSpacing: -0.5, fontFamily: "'Geist',sans-serif" }}>{profile.name}</div>
+        <div style={{ fontSize: mobile ? 16 : 18, fontWeight: 800, color: "#f1f1f9", letterSpacing: -0.5, fontFamily: "'Geist',sans-serif" }}>{profile.userName}</div>
         <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 700, letterSpacing: 0.5, marginTop: 1 }}>{profile.title}</div>
         <p style={{ fontSize: 12.5, color: "#9ca3af", lineHeight: 1.6, margin: "10px 0" }}>{profile.bio}</p>
         <div style={{ fontSize: 11.5, color: "#6b7280", marginBottom: 12, display: "flex", alignItems: "center", gap: 4 }}>
