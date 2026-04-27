@@ -19,9 +19,9 @@ api/
 ├── client.js
 ├── auth.js
 ├── endpoints/
-│   ├── users.js
-│   ├── products.js
-│   ├── orders.js
+│   ├── usersApi.js
+│   ├── productsApi.js
+│   ├── ordersApi.js
 │   └── ...
 ├── services/
 │   ├── UserService.js
@@ -42,7 +42,7 @@ api/
 
 ### Module Categories
 1. **Client Configuration**: Base API client setup and configuration (axios, fetch wrapper)
-2. **Endpoints**: API endpoint definitions and URLs
+2. **Endpoints**: API endpoint definitions and URLs. Must end with "Api.js" (e.g., usersApi.js, productsApi.js)
 3. **Services**: Business logic for API operations (UserService, ProductService, etc.)
 4. **Interceptors**: Request/response interceptors for auth, logging, error handling
 5. **Utilities**: Helper functions for API operations
