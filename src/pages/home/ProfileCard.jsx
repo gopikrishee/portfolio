@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "./Card";
+import Card from "../../components/Card";
 
 function Avatar({ size = 76, profile }) {
   return (

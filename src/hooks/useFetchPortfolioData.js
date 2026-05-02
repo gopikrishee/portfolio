@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { fetchUser } from '../api/userApi';
+import { fetchBlogs } from '../api/blogApi';
 
 /**
- * Custom hook to load user data once on initial render.
- * @returns {{ data: { userId: string, userName: string, email: string, avatarUrl: string, bio: string, designation: string }|null, loading: boolean, error: Error|null }}
+ * Custom hook to load initial portfolio data (user + blogs) on mount.
  */
-export function useFetchUser() {
-  const [data, setData] = useState(null);
+export function useFetchPortfolioData() {
+  const [data, setData] = useState({ user: null, blogs: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,9 +15,13 @@ export function useFetchUser() {
     
     async function loadData() {
       try {
-        const result = await fetchUser();
+        setLoading(true);
+        const [user, blogs] = await Promise.all([fetchUser(), fetchBlogs()]);
         if (isMounted) {
-          setData(Array.isArray(result) ? result[0] : result);
+          setData({ 
+            user: Array.isArray(user) ? user[0] : user, 
+            blogs 
+          });
         }
       } catch (err) {
         if (isMounted) {
@@ -37,5 +41,5 @@ export function useFetchUser() {
     };
   }, []);
 
-  return { data, loading, error };
+  return { ...data, loading, error };
 }

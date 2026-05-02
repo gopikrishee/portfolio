@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Portfolio from "./App";
-import Blog from "./components/Blog";
+import Blog from "./pages/home/Blog";
 
 export default function AppRoutes() {
   return (
