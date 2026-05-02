@@ -1,5 +1,5 @@
-import Card from "./Card";
-import SectionLabel from "./SectionLabel";
+import Card from "../../components/Card";
+import SectionLabel from "../../components/SectionLabel";
 
 function ExperienceCard({ experience }) {
   return (

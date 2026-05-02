@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import Card from "./components/Card";
 import SectionLabel from "./components/SectionLabel";
-import ProjectsCard from "./components/ProjectsCard";
-import ContactCard from "./components/ContactCard";
-import { ProfileCard, Avatar } from "./components/ProfileCard";
-import ExperienceCard from "./components/ExperienceCard";
-import SkillsCard from "./components/SkillsCard";
+import ProjectsCard from "./pages/home/ProjectsCard";
+import ContactCard from "./pages/home/ContactCard";
+import { ProfileCard, Avatar } from "./pages/home/ProfileCard";
+import ExperienceCard from "./pages/home/ExperienceCard";
+import SkillsCard from "./pages/home/SkillsCard";
 import Navbar from "./components/Navbar";
-import { useFetchUser } from "./hooks/useFetchUser";
+import { useFetchPortfolioData } from "./hooks/useFetchPortfolioData";
 
 /* ─── Data ─────────────────────────────────────────────────── */
 const HARDCODED_STATS = { posts: 42, followers: "1.2K", following: 318 };
@@ -21,21 +21,7 @@ const HARDCODED_EXPERIENCE = [
   { company: "Cognizant", role: "Programmer Analyst", years: "2014 – 2017" },
 ];
 
-const BLOGS = [
-  { id: 1, title: "Kubernetes Deployment Strategies for .NET Apps", date: "Mar 18, 2026", tag: "DevOps", preview: "Rolling updates, blue-green deployments, and canary releases — here's how I manage zero-downtime deploys for large-scale enterprise .NET applications running on K8s clusters.", readTime: "8 min read", likes: 94, comments: 12 },
-  { id: 2, title: "ADO.NET vs Entity Framework: When to Choose What", date: "Mar 10, 2026", tag: "Backend", preview: "After 10+ years of working with both, here's my honest take on which data access strategy wins in different scenarios — performance benchmarks included.", readTime: "6 min read", likes: 138, comments: 27 },
-  { id: 3, title: "Migrating a Legacy WinForms App to .NET 8", date: "Feb 28, 2026", tag: "Migration", preview: "A practical guide from our real-world migration journey. Pitfalls, wins, and everything in between when modernizing a 12-year-old WinForms codebase.", readTime: "10 min read", likes: 211, comments: 44 },
-  { id: 4, title: "Clean Architecture in C#: A Practical Guide", date: "Feb 14, 2026", tag: "Architecture", preview: "Forget the theory — here's how I implement Clean Architecture in real production projects. Domain layers, use cases, and dependency injection done right.", readTime: "7 min read", likes: 176, comments: 33 },
-  { id: 5, title: "Docker for .NET Developers: Getting Started", date: "Jan 30, 2026", tag: "Docker", preview: "Containers changed how I ship code. This beginner-friendly guide walks through dockerizing your first .NET 8 API with multi-stage builds and best practices.", readTime: "5 min read", likes: 89, comments: 18 },
-];
-
-const TAG_COLORS = {
-  DevOps:       { bg: "rgba(99,102,241,0.15)",  text: "#818cf8", border: "rgba(99,102,241,0.3)" },
-  Backend:      { bg: "rgba(16,185,129,0.12)",  text: "#34d399", border: "rgba(16,185,129,0.3)" },
-  Migration:    { bg: "rgba(245,158,11,0.12)",  text: "#fbbf24", border: "rgba(245,158,11,0.3)" },
-  Architecture: { bg: "rgba(239,68,68,0.12)",   text: "#f87171", border: "rgba(239,68,68,0.3)" },
-  Docker:       { bg: "rgba(6,182,212,0.12)",   text: "#22d3ee", border: "rgba(6,182,212,0.3)" },
-};
+import { BLOGS, TAG_COLORS } from "./constants/data";
 
 /* ─── Breakpoint hook ───────────────────────────────────────── */
 function useBreakpoint() {
@@ -115,96 +101,7 @@ function OpenToWork({ status = "open-to-opportunities" }) {
   );
 }
 
-/* ─── Blog Card ─────────────────────────────────────────────── */
-function BlogCard({ post, index, mobile, profile }) {
-  const [hovered, setHovered] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const tag = TAG_COLORS[post.tag] || TAG_COLORS.Backend;
-  return (
-    <article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: hovered ? "#1a1a2e" : "#16162a",
-        border: `1px solid ${hovered ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.06)"}`,
-        borderRadius: 16, padding: mobile ? 14 : "20px 22px",
-        transition: "all 0.25s", cursor: "pointer",
-        transform: hovered ? "translateY(-2px)" : "none",
-        boxShadow: hovered ? "0 8px 32px rgba(0,0,0,0.5)" : "0 2px 12px rgba(0,0,0,0.3)",
-        animation: "fadeSlideIn 0.4s ease forwards",
-        animationDelay: `${index * 0.07}s`, opacity: 0,
-      }}>
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 10 }}>
-        <Avatar size={mobile ? 38 : 46} profile={profile} />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-            <span style={{ fontSize: mobile ? 13 : 14, fontWeight: 800, color: "#f1f1f9", fontFamily: "'Geist',sans-serif" }}>{profile.name}</span>
-            <span style={{ fontSize: 11, color: "#4b5563" }}>@gopikrsh · {post.date}</span>
-          </div>
-          <div style={{ fontSize: 10.5, color: "#6b7280" }}>{profile.title}</div>
-        </div>
-        <span style={{ background: tag.bg, color: tag.text, border: `1px solid ${tag.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{post.tag}</span>
-      </div>
-      <h2 style={{ fontSize: mobile ? 14 : 16, fontWeight: 800, color: "#e2e8f0", margin: "0 0 7px", lineHeight: 1.4, fontFamily: "'Geist',sans-serif", letterSpacing: -0.3 }}>{post.title}</h2>
-      <p style={{ fontSize: mobile ? 12.5 : 13.5, color: "#9ca3af", lineHeight: 1.65, margin: "0 0 12px" }}>{post.preview}</p>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 10, flexWrap: "wrap", gap: 8 }}>
-        <div style={{ display: "flex", gap: 14 }}>
-          <button onClick={e => { e.stopPropagation(); setLiked(!liked); }} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", gap: 5, color: liked ? "#f87171" : "#6b7280", fontSize: 12 }}>
-            <span>{liked ? "❤️" : "🤍"}</span>
-            <span style={{ fontWeight: 600 }}>{post.likes + (liked ? 1 : 0)}</span>
-          </button>
-          <button style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", gap: 5, color: "#6b7280", fontSize: 12 }}>
-            <span>💬</span><span style={{ fontWeight: 600 }}>{post.comments}</span>
-          </button>
-          <button style={{ background: "none", border: "none", cursor: "pointer", padding: 0, color: "#6b7280", fontSize: 12 }}>🔁</button>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          {!mobile && <span style={{ fontSize: 11, color: "#4b5563" }}>⏱ {post.readTime}</span>}
-          <Link to={`/blog/${post.id}`} style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", textDecoration: "none", borderRadius: 8, padding: "5px 12px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Read More →</Link>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* ─── Feed Section ──────────────────────────────────────────── */
-function FeedSection({ mobile, profile }) {
-  const [filter, setFilter] = useState("Latest Posts");
-  const filteredBlogs = filter === "Popular" ? BLOGS.filter(b => b.likes > 100) : BLOGS;
-  return (
-    <div style={{ display: "flex", flexDirection: "column", flex: 1, minWidth: 0 }}>
-      <div style={{
-        background: "rgba(22,22,42,0.9)", backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        padding: "12px 16px", borderRadius: "16px 16px 0 0",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        position: "sticky", top: mobile ? 50 : 0, zIndex: 9,
-      }}>
-        <div style={{ display: "flex" }}>
-          {["Latest Posts", "Popular"].map((tab) => (
-            <button key={tab} onClick={() => setFilter(tab)} style={{
-              background: filter === tab ? "rgba(99,102,241,0.15)" : "none",
-              border: "none", color: filter === tab ? "#818cf8" : "#6b7280",
-              fontWeight: filter === tab ? 800 : 500, fontSize: 12.5, cursor: "pointer",
-              padding: "6px 12px", borderRadius: 8,
-              borderBottom: filter === tab ? "2px solid #6366f1" : "2px solid transparent",
-              fontFamily: "'Geist',sans-serif",
-            }}>{tab}</button>
-          ))}
-        </div>
-        <span style={{ fontSize: 11, color: "#4b5563" }}>{filteredBlogs.length} posts</span>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 2, background: "rgba(255,255,255,0.015)" }}>
-        {filteredBlogs.map((post, i) => <BlogCard key={post.id} post={post} index={i} mobile={mobile} profile={profile} />)}
-      </div>
-      <div style={{ padding: 16, textAlign: "center" }}>
-        <button style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", color: "#818cf8", borderRadius: 10, padding: "10px 24px", fontSize: 12.5, fontWeight: 700, cursor: "pointer" }}>
-          Load More Posts
-        </button>
-      </div>
-    </div>
-  );
-}
+import { FeedSection } from "./pages/home/feeds/FeedSection";
 
 /* ─── Mobile Bottom Tab Bar ─────────────────────────────────── */
 function BottomNav({ active, setActive }) {
@@ -238,7 +135,7 @@ function BottomNav({ active, setActive }) {
 
 /* ─── Root ──────────────────────────────────────────────────── */
 export default function Portfolio() {
-  const { data: userData, loading, error } = useFetchUser();
+  const { user: userData, blogs, loading, error } = useFetchPortfolioData();
   const bp = useBreakpoint();
   
   const [scrolled, setScrolled] = useState(false);
@@ -321,7 +218,7 @@ export default function Portfolio() {
           <SocialCard />
         </div>
       );
-      return <FeedSection mobile profile={PROFILE} />;
+      return <FeedSection mobile profile={PROFILE} blogs={blogs} />;
     };
     return (
       <div style={base}>
@@ -345,7 +242,7 @@ export default function Portfolio() {
             <OpenToWork status={jobSearchStatus} />
           </div>
           <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-            <FeedSection profile={PROFILE} />
+            <FeedSection profile={PROFILE} blogs={blogs} />
             <ProjectsCard horizontal />
             <ContactCard email={userData.email} row />
             <SocialCard row />
@@ -365,7 +262,7 @@ export default function Portfolio() {
           <SkillsCard profile={PROFILE} />
           <ExperienceCard experience={PROFILE.experience} />
         </aside>
-        <FeedSection profile={PROFILE} />
+        <FeedSection profile={PROFILE} blogs={blogs} />
         <aside style={{ width: 240, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
           <OpenToWork status={jobSearchStatus} />
           <ProjectsCard />

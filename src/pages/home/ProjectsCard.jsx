@@ -1,7 +1,7 @@
-import Card from "./Card";
-import SectionLabel from "./SectionLabel";
+import Card from "../../components/Card";
+import SectionLabel from "../../components/SectionLabel";
 
-import useGitHub from "../hooks/useGitHub";
+import useGitHub from "../../hooks/useGitHub";
 
 function ProjectsCard({ horizontal }) {
   const { repos, loading, error, refetch } = useGitHub("gopikrishee");
