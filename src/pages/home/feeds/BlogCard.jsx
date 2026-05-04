@@ -36,12 +36,13 @@ export function BlogCard({ post, index, mobile, profile }) {
           <div style={{ fontSize: 10.5, color: "#6b7280" }}>{profile.title}</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
-          {post.tags?.map((tag, i) => {
+          {post.tags?.[0] && (() => {
+            const tag = post.tags[0];
             const tagStyle = TAG_COLORS[tag] || TAG_COLORS.backend;
             return (
-              <span key={i} style={{ background: tagStyle.bg, color: tagStyle.text, border: `1px solid ${tagStyle.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{tag}</span>
+              <span style={{ background: tagStyle.bg, color: tagStyle.text, border: `1px solid ${tagStyle.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{tag}</span>
             );
-          })}
+          })()}
         </div>
       </div>
       <h2 style={{ fontSize: mobile ? 14 : 16, fontWeight: 800, color: "#e2e8f0", margin: "0 0 7px", lineHeight: 1.4, fontFamily: "'Geist',sans-serif", letterSpacing: -0.3 }}>{post.title}</h2>
