@@ -193,6 +193,11 @@ export default function Portfolio() {
   const isMobile  = bp === "mobile";
   const isTablet  = bp === "tablet";
 
+  const handleHeroClick = () => {
+    if (isMobile) setMobileTab("profile");
+    else window.location.href = "/";
+  };
+
   const base = { minHeight: "100vh", background: "#0d0d1a", fontFamily: "'Geist',sans-serif", color: "#e2e8f0" };
 
   /* ── MOBILE ── */
@@ -222,7 +227,7 @@ export default function Portfolio() {
     };
     return (
       <div style={base}>
-        <Navbar scrolled={scrolled} isMobile />
+        <Navbar scrolled={scrolled} isMobile onHeroClick={handleHeroClick} />
         <div style={{ padding: "12px 12px 80px" }}>{renderTab()}</div>
         <BottomNav active={mobileTab} setActive={setMobileTab} />
       </div>
@@ -233,7 +238,7 @@ export default function Portfolio() {
   if (isTablet) {
     return (
       <div style={base}>
-        <Navbar scrolled={scrolled} />
+        <Navbar scrolled={scrolled} onHeroClick={handleHeroClick} />
         <div style={{ maxWidth: 860, margin: "0 auto", padding: "20px 16px", display: "flex", gap: 14, alignItems: "flex-start" }}>
           <div style={{ width: 252, flexShrink: 0, display: "flex", flexDirection: "column", gap: 12, position: "sticky", top: 20, height: "fit-content" }}>
             <ProfileCard profile={PROFILE} />
@@ -255,7 +260,7 @@ export default function Portfolio() {
   /* ── DESKTOP (3-col) ── */
   return (
     <div style={base}>
-      <Navbar scrolled={scrolled} />
+      <Navbar scrolled={scrolled} onHeroClick={handleHeroClick} />
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 16px", display: "flex", gap: 16, alignItems: "flex-start" }}>
         <aside style={{ width: 260, flexShrink: 0, position: "sticky", top: 20, height: "fit-content", display: "flex", flexDirection: "column", gap: 12 }}>
           <ProfileCard profile={PROFILE} />

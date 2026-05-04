@@ -3,14 +3,16 @@ import Card from "../../components/Card";
 
 function Avatar({ size = 76, profile }) {
   return (
-    <div style={{
-      width: size, height: size, borderRadius: "50%",
-      background: "linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#06b6d4 100%)",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      fontSize: size * 0.37, fontWeight: 800, color: "#fff", letterSpacing: -1,
-      boxShadow: "0 0 0 3px #1e1e2e,0 0 0 5px rgba(99,102,241,0.4)",
-      flexShrink: 0,
-    }}>{profile.avatar}</div>
+    <img 
+      src="/gopipic.png" 
+      alt={profile.userName} 
+      style={{
+        width: size, height: size, borderRadius: "50%",
+        objectFit: "cover",
+        boxShadow: "0 0 0 3px #1e1e2e,0 0 0 5px rgba(99,102,241,0.4)",
+        flexShrink: 0,
+      }} 
+    />
   );
 }
 
@@ -24,13 +26,6 @@ function ProfileCard({ profile, mobile }) {
       <div style={{ padding: "0 18px 18px", position: "relative" }}>
         <div style={{ marginTop: mobile ? -30 : -38, marginBottom: 10, display: "flex", alignItems: "flex-end", justifyContent: mobile ? "space-between" : "flex-start" }}>
           <Avatar size={mobile ? 60 : 76} profile={profile} />
-          {mobile && (
-            <div style={{ display: "flex", gap: 6, paddingBottom: 4 }}>
-              {["💼", "🐙", "🐦"].map(ic => (
-                <button key={ic} style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", borderRadius: 8, width: 32, height: 32, fontSize: 14, cursor: "pointer" }}>{ic}</button>
-              ))}
-            </div>
-          )}
         </div>
         <div style={{ fontSize: mobile ? 16 : 18, fontWeight: 800, color: "#f1f1f9", letterSpacing: -0.5, fontFamily: "'Geist',sans-serif" }}>{profile.userName}</div>
         <div style={{ fontSize: 12, color: "#6366f1", fontWeight: 700, letterSpacing: 0.5, marginTop: 1 }}>{profile.title}</div>
