@@ -20,7 +20,7 @@ function ProfileCard({ profile, mobile }) {
   const [rh, setRh] = useState(false);
   return (
     <Card style={{ padding: 0, overflow: "hidden" }}>
-      <div style={{ height: mobile ? 56 : 70, background: "linear-gradient(135deg,#1e1e3f 0%,#2d1b4e 40%,#0f2a3f 100%)", position: "relative" }}>
+      <div style={{ height: mobile ? 56 : 70, backgroundImage: "url(/gopibg.png)", backgroundSize: "cover", backgroundPosition: "center", position: "relative" }}>
         <div style={{ position: "absolute", inset: 0, opacity: 0.4, backgroundImage: "repeating-linear-gradient(45deg,rgba(99,102,241,0.1) 0px,rgba(99,102,241,0.1) 1px,transparent 1px,transparent 10px)" }} />
       </div>
       <div style={{ padding: "0 18px 18px", position: "relative" }}>
