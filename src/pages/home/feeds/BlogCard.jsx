@@ -3,19 +3,16 @@ import { Link } from "react-router-dom";
 import { Avatar } from "../ProfileCard";
 
 const TAG_COLORS = {
-  DevOps:       { bg: "rgba(99,102,241,0.15)",  text: "#818cf8", border: "rgba(99,102,241,0.3)" },
-  Backend:      { bg: "rgba(16,185,129,0.12)",  text: "#34d399", border: "rgba(16,185,129,0.3)" },
-  Migration:    { bg: "rgba(245,158,11,0.12)",  text: "#fbbf24", border: "rgba(245,158,11,0.3)" },
-  Architecture: { bg: "rgba(239,68,68,0.12)",   text: "#f87171", border: "rgba(239,68,68,0.3)" },
-  Docker:       { bg: "rgba(6,182,212,0.12)",   text: "#22d3ee", border: "rgba(6,182,212,0.3)" },
+  "devops":       { bg: "rgba(99,102,241,0.15)",  text: "#818cf8", border: "rgba(99,102,241,0.3)" },
+  "backend":      { bg: "rgba(16,185,129,0.12)",  text: "#34d399", border: "rgba(16,185,129,0.3)" },
+  "migration":    { bg: "rgba(245,158,11,0.12)",  text: "#fbbf24", border: "rgba(245,158,11,0.3)" },
+  "architecture": { bg: "rgba(239,68,68,0.12)",   text: "#f87171", border: "rgba(239,68,68,0.3)" },
+  "docker":       { bg: "rgba(6,182,212,0.12)",   text: "#22d3ee", border: "rgba(6,182,212,0.3)" },
 };
 
 export function BlogCard({ post, index, mobile, profile }) {
   const [liked, setLiked] = useState(false);
   
-  // Use first tag for styling or default to Backend
-  const primaryTag = post.tags?.[0] || "Backend";
-  const tagStyle = TAG_COLORS[primaryTag] || TAG_COLORS.Backend;
   const dateStr = post.publishedAt?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || "N/A";
 
   return (
@@ -24,7 +21,7 @@ export function BlogCard({ post, index, mobile, profile }) {
         background: "#16162a",
         border: `1px solid rgba(255,255,255,0.06)`,
         borderRadius: 16, padding: mobile ? 14 : "20px 22px",
-        transition: "all 0.25s", cursor: "pointer",
+        transition: "all 0.25s", cursor: "default",
         boxShadow: "0 2px 12px rgba(0,0,0,0.3)",
         animation: "fadeSlideIn 0.4s ease forwards",
         animationDelay: `${index * 0.07}s`, opacity: 0,
@@ -38,7 +35,14 @@ export function BlogCard({ post, index, mobile, profile }) {
           </div>
           <div style={{ fontSize: 10.5, color: "#6b7280" }}>{profile.title}</div>
         </div>
-        <span style={{ background: tagStyle.bg, color: tagStyle.text, border: `1px solid ${tagStyle.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{primaryTag}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
+          {post.tags?.map((tag, i) => {
+            const tagStyle = TAG_COLORS[tag] || TAG_COLORS.backend;
+            return (
+              <span key={i} style={{ background: tagStyle.bg, color: tagStyle.text, border: `1px solid ${tagStyle.border}`, borderRadius: 20, padding: "3px 9px", fontSize: 10, fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{tag}</span>
+            );
+          })}
+        </div>
       </div>
       <h2 style={{ fontSize: mobile ? 14 : 16, fontWeight: 800, color: "#e2e8f0", margin: "0 0 7px", lineHeight: 1.4, fontFamily: "'Geist',sans-serif", letterSpacing: -0.3 }}>{post.title}</h2>
       <p style={{ fontSize: mobile ? 12.5 : 13.5, color: "#9ca3af", lineHeight: 1.65, margin: "0 0 12px" }}>{post.excerpt}</p>
