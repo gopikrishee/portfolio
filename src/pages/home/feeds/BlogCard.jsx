@@ -11,25 +11,21 @@ const TAG_COLORS = {
 };
 
 export function BlogCard({ post, index, mobile, profile }) {
-  const [hovered, setHovered] = useState(false);
   const [liked, setLiked] = useState(false);
   
   // Use first tag for styling or default to Backend
   const primaryTag = post.tags?.[0] || "Backend";
   const tagStyle = TAG_COLORS[primaryTag] || TAG_COLORS.Backend;
   const dateStr = post.publishedAt?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || "N/A";
-  console.log(post);
+
   return (
     <article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "#1a1a2e" : "#16162a",
-        border: `1px solid ${hovered ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.06)"}`,
+        background: "#16162a",
+        border: `1px solid rgba(255,255,255,0.06)`,
         borderRadius: 16, padding: mobile ? 14 : "20px 22px",
         transition: "all 0.25s", cursor: "pointer",
-        transform: hovered ? "translateY(-2px)" : "none",
-        boxShadow: hovered ? "0 8px 32px rgba(0,0,0,0.5)" : "0 2px 12px rgba(0,0,0,0.3)",
+        boxShadow: "0 2px 12px rgba(0,0,0,0.3)",
         animation: "fadeSlideIn 0.4s ease forwards",
         animationDelay: `${index * 0.07}s`, opacity: 0,
       }}>
@@ -37,7 +33,7 @@ export function BlogCard({ post, index, mobile, profile }) {
         <Avatar size={mobile ? 38 : 46} profile={profile} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-            <span style={{ fontSize: mobile ? 13 : 14, fontWeight: 800, color: "#f1f1f9", fontFamily: "'Geist',sans-serif" }}>{post.author || profile.name}</span>
+            <span style={{ fontSize: mobile ? 10 : 12, fontWeight: 600, color: "#f1f1f9", fontFamily: "'Geist',sans-serif" }}>{post.author || profile.userName}</span>
             <span style={{ fontSize: 11, color: "#4b5563" }}>{dateStr}</span>
           </div>
           <div style={{ fontSize: 10.5, color: "#6b7280" }}>{profile.title}</div>

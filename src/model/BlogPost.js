@@ -8,6 +8,7 @@ class BlogPost {
   constructor(data = {}) {
     this.id = data.id;
     this.userId = data.userId;
+    this.userName = data.userName;
     this.title = data.title;
     this.slug = data.slug;
     this.excerpt = data.excerpt;
