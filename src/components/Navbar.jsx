@@ -16,14 +16,14 @@ export default function Navbar({ scrolled, isMobile, onHeroClick }) {
         </div>
       </div>
       {isMobile ? (
-        <Link to="/blogs" style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer", textDecoration: "none" }}>Blogs</Link>
+        <button onClick={() => window.location.href = 'https://blog.gopikrishee.in'} style={{ background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", border: "none", borderRadius: 8, padding: "6px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Blogs</button>
       ) : (
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <Link to="/blogs" style={{
+          <button onClick={() => window.location.href = 'https://blog.gopikrishee.in'} style={{
             background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
             color: "#fff", border: "none", borderRadius: 8,
-            padding: "6px 14px", fontSize: 12.5, fontWeight: 700, cursor: "pointer", textDecoration: "none"
-          }}>Blogs</Link>
+            padding: "6px 14px", fontSize: 12.5, fontWeight: 700, cursor: "pointer"
+          }}>Blogs</button>
         </div>
       )}
     </nav>
