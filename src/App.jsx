@@ -186,7 +186,7 @@ export default function Portfolio() {
     location: userData.location,
     skills: userData.skills,
     experience: userData.experience,
-    stats: { posts: 42, followers: "1.2K", following: 318 },
+    stats: { posts: userData.totalBlogs, followers: "1.2K", following: 318 },
   };
 
   const jobSearchStatus = "open-to-opportunities";
