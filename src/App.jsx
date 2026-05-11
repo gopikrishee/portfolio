@@ -11,16 +11,6 @@ import SkillsCard from "./pages/home/SkillsCard";
 import Navbar from "./layout/Navbar";
 import { useFetchPortfolioData } from "./hooks/useFetchPortfolioData";
 
-/* ─── Data ─────────────────────────────────────────────────── */
-const HARDCODED_STATS = { posts: 42, followers: "1.2K", following: 318 };
-const HARDCODED_SKILLS = ["C# / .NET 10", "VB.NET", ".NET Framework", "ReactJs", "Gemini", "SQL Server", "NoSQL", "Azure", "Entity Framework", "CI/CD"];
-const HARDCODED_EXPERIENCE = [
-  { company: "Trantor", role: "Associate Tech Lead", years: "2025 – Present" },
-  { company: "Ascendion", role: "Senior Software Engineer", years: "2023 – 2025" },
-  { company: "Club Operations Pyt Ltd", role: "Senior Software Engineer", years: "2017 – 2023" },
-  { company: "Cognizant", role: "Programmer Analyst", years: "2014 – 2017" },
-];
-
 import { BLOGS, TAG_COLORS } from "./constants/data";
 
 /* ─── Breakpoint hook ───────────────────────────────────────── */
@@ -157,6 +147,7 @@ export default function Portfolio() {
     location: userData.location,
     skills: userData.skills,
     experience: userData.experience,
+    isAdmin: userData.isAdmin,
     stats: { posts: userData.totalBlogs, followers: "1.2K", following: 318 },
   };
 

@@ -58,6 +58,27 @@ function ProfileCard({ profile, mobile }) {
             cursor: "pointer", width: mobile ? undefined : "100%", transition: "all 0.2s",
             boxShadow: rh ? "0 6px 20px rgba(99,102,241,0.4)" : "0 2px 8px rgba(99,102,241,0.2)",
           }}>📄 Download Resume</button>
+
+          {profile.isAdmin && (
+            <button
+              onClick={() => window.location.href = "/creator"}
+              style={{
+                flex: mobile ? 1 : "unset",
+                background: "transparent",
+                color: "#6366f1",
+                border: "1px solid #6366f1",
+                borderRadius: 10,
+                padding: "9px 0",
+                fontSize: 12.5,
+                fontWeight: 700,
+                cursor: "pointer",
+                width: mobile ? undefined : "100%",
+                transition: "all 0.2s"
+              }}
+            >
+              Creator
+            </button>
+          )}
         </div>
       </div>
     </Card>
