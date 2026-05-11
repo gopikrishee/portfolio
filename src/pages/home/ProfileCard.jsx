@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Card from "../../components/Card";
 
 function Avatar({ size = 76, profile }) {
@@ -60,8 +61,8 @@ function ProfileCard({ profile, mobile }) {
           }}>📄 Download Resume</button>
 
           {profile.isAdmin && (
-            <button
-              onClick={() => window.location.href = "/creator"}
+            <Link
+              to="/creator"
               style={{
                 flex: mobile ? 1 : "unset",
                 background: "transparent",
@@ -73,11 +74,15 @@ function ProfileCard({ profile, mobile }) {
                 fontWeight: 700,
                 cursor: "pointer",
                 width: mobile ? undefined : "100%",
-                transition: "all 0.2s"
+                transition: "all 0.2s",
+                textDecoration: "none",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
               }}
             >
               Creator
-            </button>
+            </Link>
           )}
         </div>
       </div>
