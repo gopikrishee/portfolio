@@ -1,0 +1,6 @@
+{
+  "name": "Gopi Krishnan Portfolio",
+  "description": "Portfolio and developer blog of Gopi Krishnan",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

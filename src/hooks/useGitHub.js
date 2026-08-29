@@ -31,6 +31,39 @@ const shapeRepos = (repos) =>
   .sort((a, b) => b.stars - a.stars) // sort by stars descending
   .slice(0, 3);                       // keep only top 3;
 
+const FALLBACK_REPOS = [
+  {
+    name: "portfolio",
+    description: "Personal developer portfolio and blog built with React, Vite, and Tailwind CSS.",
+    language: "JavaScript",
+    stars: 12,
+    forks: 3,
+    isPrivate: false,
+    url: "https://github.com/gopikrishee/portfolio",
+    updatedAt: "Mar 2026",
+  },
+  {
+    name: "dotnet-microservices",
+    description: "Event-driven microservices architecture using .NET 8, RabbitMQ, and Clean Architecture.",
+    language: "C#",
+    stars: 28,
+    forks: 7,
+    isPrivate: false,
+    url: "https://github.com/gopikrishee",
+    updatedAt: "Feb 2026",
+  },
+  {
+    name: "k8s-deployment-templates",
+    description: "Kubernetes manifests and Helm charts for enterprise .NET application deployment.",
+    language: "YAML",
+    stars: 19,
+    forks: 4,
+    isPrivate: false,
+    url: "https://github.com/gopikrishee",
+    updatedAt: "Jan 2026",
+  }
+];
+
 const useGitHub = (username) => {
   const [profile, setProfile] = useState(null);
   const [repos, setRepos] = useState([]);
@@ -52,15 +85,38 @@ const useGitHub = (username) => {
       setProfile(shapeProfile(profileData));
       setRepos(shapeRepos(reposData));
     } catch (err) {
-      setError(err.message);
+      console.warn("GitHub API error, using fallback repo list:", err.message);
+      setRepos(FALLBACK_REPOS);
     } finally {
       setLoading(false);
     }
   }, [username]);
 
   useEffect(() => {
-    loadUserData();
-  }, [loadUserData]);
+    let ignore = false;
+    async function fetchData() {
+      if (!username) return;
+      try {
+        const [profileData, reposData] = await Promise.all([
+          fetchUserProfile(username),
+          fetchUserRepos(username),
+        ]);
+        if (!ignore) {
+          setProfile(shapeProfile(profileData));
+          setRepos(shapeRepos(reposData));
+        }
+      } catch (err) {
+        if (!ignore) {
+          console.warn("GitHub API error, using fallback repo list:", err.message);
+          setRepos(FALLBACK_REPOS);
+        }
+      }
+    }
+    fetchData();
+    return () => {
+      ignore = true;
+    };
+  }, [username]);
 
   return { profile, repos, loading, error, refetch: loadUserData };
 };

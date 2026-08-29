@@ -1,3 +1,19 @@
+export const DEFAULT_USER = {
+  userName: "Gopi Krishnan S",
+  title: "Full Stack Engineer & Cloud Specialist",
+  bio: "Passionate engineer building high-performance .NET, React, and cloud-native solutions. Focused on scalable architectures and developer tooling.",
+  location: "Bengaluru, India",
+  skills: [".NET 8", "C#", "React", "TypeScript", "Azure", "Docker", "Kubernetes", "SQL Server", "Microservices", "REST APIs"],
+  experience: [
+    { role: "Senior Software Engineer", company: "Tech Solutions", active_years: "2023 - Present", current: true },
+    { role: "Software Engineer", company: "Enterprise Systems", active_years: "2021 - 2023", current: false },
+    { role: "Associate Developer", company: "Digital Innovations", active_years: "2019 - 2021", current: false }
+  ],
+  isAdmin: true,
+  totalBlogs: 5,
+  email: "gopikrishee@gmail.com",
+};
+
 export const BLOGS = [
   { id: 1, title: "Kubernetes Deployment Strategies for .NET Apps", date: "Mar 18, 2026", tag: "DevOps", preview: "Rolling updates, blue-green deployments, and canary releases — here's how I manage zero-downtime deploys for large-scale enterprise .NET applications running on K8s clusters.", readTime: "8 min read", likes: 94, comments: 12 },
   { id: 2, title: "ADO.NET vs Entity Framework: When to Choose What", date: "Mar 10, 2026", tag: "Backend", preview: "After 10+ years of working with both, here's my honest take on which data access strategy wins in different scenarios — performance benchmarks included.", readTime: "6 min read", likes: 138, comments: 27 },
