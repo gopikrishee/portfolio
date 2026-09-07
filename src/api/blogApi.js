@@ -1,6 +1,6 @@
 import { BlogPost } from '../model';
 
-const BASE_URL = 'https://apigopikrishee.runasp.net';
+const BASE_URL = 'https://portfolio-backend-lac-three.vercel.app';
 
 /**
  * Fetches the list of blogs.
