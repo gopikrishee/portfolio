@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Navbar from "../../layout/Navbar";
+import { createBlog } from "../../api/blogApi";
 
 const BLOCK_TYPES = [
   { type: "content", label: "Text Content", icon: "✏️", desc: "Paragraph text" },
@@ -18,9 +19,15 @@ export default function BlogAdminDashboard() {
   const [blocks, setBlocks] = useState([makeBlock("content")]);
   const [openMenuIdx, setOpenMenuIdx] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: "", type: "success" });
+  const [isPublishing, setIsPublishing] = useState(false);
   const [focusedBlock, setFocusedBlock] = useState(null);
   const menuRef = useRef();
+
+  const showNotification = (message, type = "success") => {
+    setToast({ show: true, message, type });
+    setTimeout(() => setToast({ show: false, message: "", type: "success" }), 3500);
+  };
 
   const handleTagKey = (e) => {
     if ((e.key === "Enter" || e.key === ",") && tagInput.trim()) {
@@ -53,12 +60,83 @@ export default function BlogAdminDashboard() {
     setBlocks(blocks.filter((b) => b.id !== id));
   };
 
-  const handleSave = () => {
-    const data = { title, subtitle, tags, blocks };
-    console.log("Saving blog:", data);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2500);
+  const handlePublish = async () => {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) {
+      showNotification("Please enter a blog title before publishing.", "error");
+      return;
+    }
+
+    // Capture any pending tag still typed in the input
+    let finalTags = [...tags];
+    if (tagInput.trim()) {
+      const pendingTag = tagInput.trim().replace(/^#/, "");
+      if (pendingTag && !finalTags.includes(pendingTag)) {
+        finalTags.push(pendingTag);
+        setTags(finalTags);
+        setTagInput("");
+      }
+    }
+
+    const textcontents = [];
+    const blockquote = [];
+    const codesnippet = [];
+    const contentBlocks = [];
+
+    blocks.forEach((block) => {
+      const content = block.value;
+      if (!content || !content.trim()) return;
+
+      let apiType = "text";
+      if (block.type === "blockquote") {
+        apiType = "blockquote";
+        blockquote.push(content);
+      } else if (block.type === "code" || block.type === "codesnippet") {
+        apiType = "codesnippet";
+        codesnippet.push(content);
+      } else {
+        apiType = "text";
+        textcontents.push(content);
+      }
+
+      contentBlocks.push({
+        type: apiType,
+        content,
+        order: contentBlocks.length,
+      });
+    });
+
+    if (contentBlocks.length === 0) {
+      showNotification("Please add at least one content block before publishing.", "error");
+      return;
+    }
+
+    const payload = {
+      title: trimmedTitle,
+      subtitle: subtitle.trim(),
+      tags: finalTags,
+      textcontents,
+      blockquote,
+      codesnippet,
+      contentBlocks,
+    };
+
+    setIsPublishing(true);
+    try {
+      await createBlog(payload);
+      showNotification("✓ Blog published successfully!", "success");
+      setTitle("");
+      setSubtitle("");
+      setTags([]);
+      setTagInput("");
+      setBlocks([makeBlock("content")]);
+    } catch (err) {
+      showNotification(err.message || "Failed to publish blog. Please try again.", "error");
+    } finally {
+      setIsPublishing(false);
+    }
   };
+
 
   const autoResize = (e) => {
     e.target.style.height = "auto";
@@ -218,14 +296,40 @@ export default function BlogAdminDashboard() {
         <button
           className="blog-admin-btn blog-admin-btn-secondary"
           onClick={() => setShowPreview(true)}
+          disabled={isPublishing}
         >
           Preview
         </button>
         <button
           className="blog-admin-btn blog-admin-btn-primary"
-          onClick={handleSave}
+          onClick={handlePublish}
+          disabled={isPublishing}
+          style={{
+            opacity: isPublishing ? 0.7 : 1,
+            cursor: isPublishing ? "not-allowed" : "pointer",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+          }}
         >
-          Publish
+          {isPublishing ? (
+            <>
+              <svg
+                className="animate-spin"
+                style={{ width: 16, height: 16 }}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+              >
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" />
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeLinecap="round" />
+              </svg>
+              <span>Publishing...</span>
+            </>
+          ) : (
+            "Publish"
+          )}
         </button>
       </div>
 
@@ -275,10 +379,16 @@ export default function BlogAdminDashboard() {
         </div>
       )}
 
-      {/* Save toast */}
-      {showToast && (
-        <div className="blog-admin-save-toast">
-          ✓ Blog saved successfully
+      {/* Toast */}
+      {toast.show && (
+        <div
+          className="blog-admin-save-toast"
+          style={{
+            background: toast.type === "error" ? "#dc2626" : "#1D9BF0",
+            boxShadow: toast.type === "error" ? "0 4px 24px rgba(220, 38, 38, 0.4)" : "0 4px 24px rgba(29, 155, 240, 0.4)",
+          }}
+        >
+          {toast.message}
         </div>
       )}
     </div>

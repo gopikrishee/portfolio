@@ -14,3 +14,33 @@ export async function fetchBlogs() {
   const data = await response.json();
   return BlogPost.fromJSONArray(data);
 }
+
+/**
+ * Creates a new blog post via POST /blogs.
+ * @param {Object} blogData
+ * @param {string} blogData.title
+ * @param {string} blogData.subtitle
+ * @param {string[]} blogData.tags
+ * @param {string[]} blogData.textcontents
+ * @param {string[]} blogData.blockquote
+ * @param {string[]} blogData.codesnippet
+ * @param {Array<{type: string, content: string, order: number}>} blogData.contentBlocks
+ * @returns {Promise<Object>}
+ */
+export async function createBlog(blogData) {
+  const response = await fetch(`${BASE_URL}/blogs`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(blogData),
+  });
+
+  if (!response.ok) {
+    const errData = await response.json().catch(() => ({}));
+    throw new Error(errData?.message || `Failed to create blog (${response.status})`);
+  }
+
+  return response.json();
+}
+
